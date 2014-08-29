@@ -3,16 +3,42 @@ using System.Collections;
 
 public class SceneControl : MonoBehaviour 
 {
+	public int block_to_lvl_up ;
+	public int level = 1;
+
+	//set the level blocks you want 
+	public int[] level_blocks= {40,45,50,55,60,65,70,75,80,85,90,95,100};
+
+	static public bool booms;
+	static public bool player_control;
 
 	// Use this for initialization
 	void Start () 
 	{
-	
+		block_to_lvl_up =level_blocks[0];
+		level = 1;
+		player_control = false;
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
-	
+		//when player finish the level blocks number take him to next level and set new level block 
+		if (block_to_lvl_up == 0) 
+		{
+			level++;
+			block_to_lvl_up =level_blocks[level-1];
+		
+		}
+
+		//use for debug
+		//if (Input.GetKeyDown (KeyCode.Z)) 
+		//	block_to_lvl_up--;	
+
+		//allow booms to show up on crystals after level 20
+		if(level > 20)
+			booms = true;
+
+
 	}
 }
