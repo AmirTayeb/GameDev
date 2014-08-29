@@ -1,0 +1,30 @@
+using UnityEngine;
+using System.Collections;
+
+public class BlocksGeneration : MonoBehaviour {
+
+	public Transform block ;
+
+	// Use this for initialization
+	void Start () {
+	
+	}
+	
+	// Update is called once per frame
+	void Update () 
+	{
+		//when the last block land instance a new one 
+		if (!SceneControl.player_control) 
+		{
+			//set x, y, z to the block to start from
+			Instantiate(block,new Vector3(0.68f,3.27f,0f),Quaternion.identity);	
+
+			//activate player contorl
+			SceneControl.player_control =true;
+		}
+
+		//for debuging
+		//if(Input.GetKeyDown(KeyCode.X))
+		//	SceneControl.player_control =false;
+	}
+}
