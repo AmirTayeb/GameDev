@@ -1,0 +1,32 @@
+using UnityEngine;
+using System.Collections;
+
+public class RandomCrystalGeneration : MonoBehaviour 
+{
+	public Sprite[] Crystals = new Sprite[5];
+	public Transform boom ;
+	public Transform boom_counter;
+	//will be used for check if 3 same crystal make a line
+	public int Crystal_id ;
+	public int random_number;
+	// Use this for initialization
+	void Start () 
+	{
+		Crystal_id = Random.Range (0, 5);
+
+		this.gameObject.GetComponent<SpriteRenderer> ().sprite = Crystals[Crystal_id];
+
+		random_number = Random.Range (0, 25);
+	}
+	
+	// Update is called once per frame
+	void Update () 
+	{
+		if (SceneControl.booms && random_number == 3) 
+		{
+			boom.gameObject.SetActive (true);
+			boom_counter.gameObject.SetActive(true);
+		}
+
+	}
+}
