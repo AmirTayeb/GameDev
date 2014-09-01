@@ -1,0 +1,30 @@
+using UnityEngine;
+using System.Collections;
+
+public class CrystalCheck : MonoBehaviour {
+
+	public bool Empty;
+	public int this_row;
+
+	// Use this for initialization
+	void Start ()
+	{
+		Empty = true;
+	
+	}
+	
+
+	void OnTriggerStay2D(Collider2D col) 
+	{
+		Empty = false;
+
+	}
+
+	void OnTriggerExit2D (Collider2D col)
+	{
+		Empty = true; 
+	}
+
+
+
+}
