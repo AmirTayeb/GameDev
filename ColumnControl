@@ -1,0 +1,121 @@
+using UnityEngine;
+using System.Collections;
+
+public class ColumnControl : MonoBehaviour {
+
+	public int column_number;
+
+	static public bool update_blocks;
+
+	public GameObject[] row_at_column = new GameObject[65];
+
+
+	// Use this for initialization
+	void Start () 
+	{
+		for (int i = 0; i < 65;i++)
+		{
+			row_at_column[i]= GameObject.Find((i+1).ToString());
+		}
+	}
+	
+	// Update is called once per frame
+	void Update () 
+	{
+		if (transform.position.x < -0.13f) 
+		{
+			column_number = 1;
+			Debug.Log("it;s first column");
+		}
+
+		else if (transform.position.x == 0.27f) 
+		{
+			column_number = 2;
+			Debug.Log("it;s second column");
+		}
+
+		else if (transform.position.x == 0.68f) 
+		{
+			column_number = 3;
+			Debug.Log("it;s 3th column");
+		}
+
+		else if (transform.position.x == 1.09f) 
+		{
+			column_number = 4;
+			Debug.Log("it;s 4th column");
+		}
+
+		else if (transform.position.x == 1.5f) 
+		{
+			column_number = 5;
+			Debug.Log("it;s 5th column");
+		}
+
+
+		if(update_blocks)
+		{
+			/* shortcut code for later need debuging do same job using less lines
+			for (int i = 11 ; i > 0 ; i--)
+			{
+				if (row_at_column [column_number-1 + 5*i].GetComponent<CrystalCheck> ().Empty)
+				{
+					BlockMove.row = i;
+				}	
+			}
+			*/
+
+			//Debug.Log(column_number + "this row it should stop at "+BlockMove.row);
+
+			if (row_at_column [column_number-1].GetComponent<CrystalCheck> ().Empty)
+				BlockMove.row = 0;
+			
+			else if (row_at_column [column_number-1 + 5*1].GetComponent<CrystalCheck> ().Empty)
+				BlockMove.row = 1;
+
+			else if (row_at_column [column_number-1 + 5*2].GetComponent<CrystalCheck> ().Empty)
+				BlockMove.row = 2;
+
+			else if (row_at_column [column_number-1 + 5*3].GetComponent<CrystalCheck> ().Empty)
+				BlockMove.row = 3;
+
+			else if (row_at_column [column_number-1 + 5*4].GetComponent<CrystalCheck> ().Empty)
+				BlockMove.row = 4;
+			
+			else if (row_at_column [column_number-1 + 5*5].GetComponent<CrystalCheck> ().Empty)
+				BlockMove.row = 5;
+			
+			else if (row_at_column [column_number-1 + 5*6].GetComponent<CrystalCheck> ().Empty)
+				BlockMove.row = 6;
+
+			else if (row_at_column [column_number-1 + 5*7].GetComponent<CrystalCheck> ().Empty)
+				BlockMove.row = 7;
+			
+			else if (row_at_column [column_number-1 + 5*8].GetComponent<CrystalCheck> ().Empty)
+				BlockMove.row = 8;
+			
+			else if (row_at_column [column_number-1 + 5*9].GetComponent<CrystalCheck> ().Empty)
+				BlockMove.row = 9;
+			
+			else if (row_at_column [column_number-1 + 5*10].GetComponent<CrystalCheck> ().Empty)
+				BlockMove.row = 10;
+			
+			else if (row_at_column [column_number-1 + 5*11].GetComponent<CrystalCheck> ().Empty)
+				BlockMove.row = 11;
+
+			else if (row_at_column [column_number-1 + 5*12].GetComponent<CrystalCheck> ().Empty)
+				BlockMove.row = 12;
+
+			//Debug.Log(column_number + "this row it should stop at "+BlockMove.row);
+
+			update_blocks = false ;
+		}
+
+		//destory the script when the move stop so it do not miss up the next block stop point
+		if(this.gameObject.GetComponent<PlayerControl>().destroy_it)
+		{
+			Destroy (this);
+		}
+
+	}
+}
