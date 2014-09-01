@@ -1,0 +1,74 @@
+using UnityEngine;
+using System.Collections;
+
+public class BlockMove : MonoBehaviour {
+
+	/*old code
+	public float time_def ;
+	float nxt_time;*/
+	static public float speed;
+	static public int row;
+	public int row_clone;
+
+	float stop_at;
+
+	// Use this for initialization
+	void Start () 
+	{
+		//old code
+		//nxt_time = 0f;
+		speed = 0.5f;
+
+	}
+
+
+	// Update is called once per frame
+	void Update () 
+	{
+		row_clone = row;
+		switch(row)
+		{
+		case 1 : stop_at = -1.91f + 0.37f*1f; break;
+		case 2 : stop_at = -1.91f + 0.37f*2f; break;
+		case 3 : stop_at = -1.91f + 0.37f*3f; break;
+		case 4 : stop_at = -1.91f + 0.37f*4f; break;
+		case 5 : stop_at = -1.91f + 0.37f*5f; break;
+		case 6 : stop_at = -1.91f + 0.37f*6f; break;
+		case 7 : stop_at = -1.91f + 0.37f*7f; break;
+		case 8 : stop_at = -1.91f + 0.37f*8f; break;
+		case 9 : stop_at = -1.91f + 0.37f*9f; break;
+		case 10: stop_at = -1.91f + 0.37f*10f; break;
+		case 11: stop_at = -1.91f + 0.37f*11f; break;
+		case 12: stop_at = -1.91f + 0.37f*12f; break;
+		default: stop_at = -1.91f + 0f; break;
+		}
+
+			this.gameObject.rigidbody.velocity = new Vector2(0,-speed);
+
+		if (transform.position.y > stop_at && transform.position.y < stop_at +0.1) 
+		{
+			this.gameObject.rigidbody.constraints = RigidbodyConstraints.FreezePositionY;
+			transform.position= new Vector3(transform.position.x,stop_at,0f);
+
+			this.gameObject.GetComponent<PlayerControl>().destroy_it = true;
+
+			SceneControl.player_control =false;
+
+		}
+
+		if (Input.GetKeyUp (KeyCode.M))
+						row=10;
+		//old code
+		/*time_def += Time.deltaTime;
+		Debug.Log(time_def);
+
+		if (transform.position.y > -1.90 && time_def > nxt_time) 
+		{
+			nxt_time += speed;
+			this.gameObject.transform.position = new Vector3 (transform.position.x, transform.position.y - 0.37f, 0f);
+				
+		}*/
+	}
+
+
+}
