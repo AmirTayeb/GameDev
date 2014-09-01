@@ -1,0 +1,58 @@
+using UnityEngine;
+using System.Collections;
+
+public class PlayerControl : MonoBehaviour 
+{
+
+	public Transform top,mid,down;
+	Vector3 top_position,mid_position,down_position;
+	public bool destroy_it;
+	static public int block_id;
+
+	// Use this for initialization
+	void Start () 
+	{
+		this.gameObject.name = block_id.ToString();
+	}
+	
+	// Update is called once per frame
+	void Update () 
+	{
+		if (Input.GetKeyDown (KeyCode.UpArrow)) 
+		{
+			top_position = top.transform.position;
+			down_position = down.transform.position;
+			mid_position = mid.transform.position;
+
+			top.transform.position = down_position;
+			down.transform.position = mid_position;
+			mid.transform.position = top_position;
+
+		}
+
+		if (Input.GetKeyDown (KeyCode.DownArrow)) 
+		{
+			BlockMove.speed = 2.5f;
+		}
+
+		if (Input.GetKeyDown (KeyCode.RightArrow)) 
+		{
+			if(transform.position.x < 1.5f)
+			transform.position = new Vector3(transform.position.x+0.41f,transform.position.y,0);
+			ColumnControl.update_blocks = true ;
+		}
+
+		if (Input.GetKeyDown (KeyCode.LeftArrow)) 
+		{
+			if(transform.position.x > -0.13f)
+				transform.position = new Vector3(transform.position.x-0.41f,transform.position.y,0);
+			ColumnControl.update_blocks = true ;
+		}
+
+		 
+		if(destroy_it)
+		{
+			Destroy (this);
+		}
+	}
+}
